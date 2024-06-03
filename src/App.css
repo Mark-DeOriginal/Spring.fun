@@ -1,0 +1,49 @@
+.page-px {
+  @apply px-4 tablet:px-16;
+}
+
+.nav-social-link {
+  @apply bg-springGrayBlue-100 dark:bg-springBlueLight-400 rounded-full w-8 h-8 tablet-sm:w-9 tablet-sm:h-9 flex items-center justify-center;
+}
+
+.nav-social-icon {
+  @apply fill-springGrayBlue-300 dark:fill-springBluishWhite h-4 tablet-sm:h-5;
+}
+
+/*
+  When wallet is not connected
+*/
+.wallet-connect-btn {
+  @apply py-2 px-3 rounded-2xl font-medium border border-springBlueLight-200 dark:border-springBlueLight-400 text-springBlueLight-400 dark:text-springBluishWhite;
+}
+
+button {
+  @apply select-none;
+}
+
+.hamburger {
+  @apply bg-springGrayBlue-100 dark:bg-springBlueLight-400 rounded-full w-8 h-8 flex items-center justify-center;
+}
+
+.hamburger-icon {
+  @apply fill-springBlueLight-400 dark:fill-springBluishWhite h-[14px];
+}
+
+/*
+  When wallet is connected
+*/
+.wallet-connected-btn {
+  @apply pr-1 pl-3 py-1 rounded-full font-medium border border-springBlueLight-200 dark:border-springBlueLight-400 text-springBlueLight-400 dark:text-springBluishWhite;
+}
+
+.menu.big-screen-view {
+  @apply absolute right-0 top-12 w-[400px] bg-offWhite dark:bg-springBlueLight-400 text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-4 py-4 rounded-3xl;
+}
+
+.modal {
+  @apply fixed;
+}
+
+.modal.modal-backdrop {
+  @apply absolute h-full w-full bg-springBlue;
+}
