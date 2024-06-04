@@ -3,27 +3,69 @@ import getTheme from "../utilities/getTheme";
 
 interface UIState {
   theme: string;
-  isMenuOpen: boolean;
+  modal: {
+    open?: boolean;
+    show?: boolean;
+    content?: string;
+    marginTop?: string;
+    width?: string;
+    extraStyles?: string;
+  };
 }
 
 const initialState: UIState = {
   theme: getTheme(),
-  isMenuOpen: false,
+  modal: {
+    open: false,
+    show: false,
+    content: "WELCOME_SCREEN",
+    width: "w-[400px]",
+    marginTop: "mt-[28px]",
+    extraStyles: "",
+  },
 };
 
-export const uiSlice = createSlice({
+const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
     setTheme(state, action: PayloadAction<string>) {
       state.theme = action.payload;
     },
-    setIsMenuOpen(state, action: PayloadAction<boolean>) {
-      state.isMenuOpen = action.payload;
+    setModalState(
+      state,
+      action: PayloadAction<{
+        open?: boolean;
+        show?: boolean;
+        content?: string;
+        marginTop?: string;
+        width?: string;
+        extraStyles?: string;
+      }>
+    ) {
+      state.modal = {
+        ...state.modal,
+        ...action.payload,
+      };
+    },
+    toggleModalOpen(state) {
+      state.modal.open = !state.modal.open;
+    },
+    setModalOpen(state, action: PayloadAction<boolean>) {
+      state.modal.open = action.payload;
+    },
+    setModalShow(state, action: PayloadAction<boolean>) {
+      state.modal.show = action.payload;
     },
   },
 });
 
-export const { setTheme, setIsMenuOpen } = uiSlice.actions;
+export const {
+  setTheme,
+  setModalState,
+  toggleModalOpen,
+  setModalOpen,
+  setModalShow,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

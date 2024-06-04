@@ -1,5 +1,5 @@
 import { WalletIcon } from "../assets/icons";
-import OpenMenuBtn from "./OpenMenuBtn";
+import OpenProfileBtn from "./OpenProfileBtn";
 
 export default function WalletConnectBtn({
   isConnected = true,
@@ -8,7 +8,7 @@ export default function WalletConnectBtn({
 }) {
   return isConnected ? (
     <>
-      <OpenMenuBtn />
+      <OpenProfileBtn />
     </>
   ) : (
     <>

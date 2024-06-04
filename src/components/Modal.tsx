@@ -1,33 +1,44 @@
-import React, { ReactNode } from "react";
-import closeMenu from "../utilities/closeMenu";
 import ReactDOM from "react-dom";
+import { useSelector } from "react-redux";
+import { RootState, store } from "../redux-states/store";
+import { setModalOpen } from "../redux-states/uiSlice";
 
-interface ModalProps {
-  children: ReactNode;
-}
+export default function Modal() {
+  // Load required data from our redux store
+  const modal = useSelector((state: RootState) => state.ui.modal);
 
-const Modal: React.FC<ModalProps> = ({ children }) => {
-  document.body.style.overflowY = "hidden";
   const modalRoot = document.getElementById("modal-root");
 
   if (!modalRoot) return null;
 
-  return ReactDOM.createPortal(
-    <div className="modal" role="dialog" aria-modal="true" tabIndex={-1}>
-      <div className="modal-backdrop" onClick={() => closeMenu()}></div>
-      <div className="modal-wrapper" onClick={(e) => e.stopPropagation()}>
-        <button
-          className="modal-close"
-          onClick={() => closeMenu()}
-          aria-label="Close modal"
-        >
-          &times;
-        </button>
-        <div className="modal-content">{children}</div>
-      </div>
-    </div>,
-    modalRoot
-  );
-};
+  const closeModal = () => {
+    document.body.style.overflowY = "auto";
+    store.dispatch(setModalOpen(false));
+  };
 
-export default Modal;
+  return (
+    modal.open &&
+    modal.show &&
+    ReactDOM.createPortal(
+      <div className={`modal`} role="dialog" aria-modal="true" tabIndex={-1}>
+        <div className="modal-container">
+          <div className="modal-backdrop" onClick={() => closeModal()}></div>
+          <div
+            className={`${modal.marginTop} ${modal.width} ${modal.extraStyles} modal-dialog`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="modal-close-btn"
+              onClick={() => closeModal()}
+              aria-label="Close modal"
+            >
+              &times;
+            </button>
+            <div className="modal-content">{modal.content}</div>
+          </div>
+        </div>
+      </div>,
+      modalRoot
+    )
+  );
+}

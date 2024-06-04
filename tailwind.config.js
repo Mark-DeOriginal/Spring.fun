@@ -26,8 +26,8 @@ export default {
       screens: {
         "tablet-sm": "380px",
         "tablet-md": "480px",
-        "tablet-lg": "520px",
-        tablet: "760px",
+        tablet: "520px",
+        "tablet-lg": "760px",
         laptop: "1160px",
       },
       boxShadow: {

@@ -8,6 +8,9 @@ export const UserWelcomeContent = () => {
       <p>This is where you come to explore Jettons.</p>
       <p>Execute trades at unparalleled speed.</p>
       <p>Create jettons that are instantly tradeable.</p>
+      <p>This is where you come to explore Jettons.</p>
+      <p>Execute trades at unparalleled speed.</p>
+      <p>Create jettons that are instantly tradeable.</p>
     </>
   );
 };

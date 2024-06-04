@@ -1,5 +1,5 @@
 .page-px {
-  @apply px-4 tablet:px-16;
+  @apply px-4 tablet-lg:px-16;
 }
 
 .nav-social-link {
@@ -11,7 +11,7 @@
 }
 
 /*
-  When wallet is not connected
+  Renders when wallet is not connected
 */
 .wallet-connect-btn {
   @apply py-2 px-3 rounded-2xl font-medium border border-springBlueLight-200 dark:border-springBlueLight-400 text-springBlueLight-400 dark:text-springBluishWhite;
@@ -30,20 +30,32 @@ button {
 }
 
 /*
-  When wallet is connected
+  Renders when wallet is connected
 */
-.wallet-connected-btn {
-  @apply pr-1 pl-3 py-1 rounded-full font-medium border border-springBlueLight-200 dark:border-springBlueLight-400 text-springBlueLight-400 dark:text-springBluishWhite;
+.profile-btn {
+  @apply pr-1 pl-3 py-1 rounded-full font-medium border border-springBlueLight-200 dark:border-springBlueLight-400 text-springBlueLight-400 dark:text-springBluishWhite  flex items-center gap-2 active:scale-[0.95];
 }
 
-.menu.big-screen-view {
-  @apply absolute right-0 top-12 w-[400px] bg-offWhite dark:bg-springBlueLight-400 text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-4 py-4 rounded-3xl;
+.popup-menu {
+  @apply bg-offWhite dark:bg-springBlueLight-400 text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-4 rounded-3xl;
 }
 
 .modal {
-  @apply fixed;
+  @apply relative;
 }
 
-.modal.modal-backdrop {
-  @apply absolute h-full w-full bg-springBlue;
+.modal-container {
+  @apply fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center max-tablet-md:items-end z-[100] overflow-y-auto;
+}
+
+.modal .modal-backdrop {
+  @apply fixed top-0 left-0 right-0 bottom-0 bg-springBlue/80;
+}
+
+.modal .modal-dialog {
+  @apply relative bg-offWhite mt-28 dark:bg-springBlueLight-400 text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-4 rounded-3xl max-tablet-md:rounded-b-none max-tablet-md:h-[500px] max-tablet-md:w-full;
+}
+
+.modal-close-btn {
+  @apply absolute top-3 right-4 p-2 rounded-full w-8 h-8 flex items-center text-2xl justify-center bg-springGrayBlue-100 dark:bg-[#58506d] dark:text-[#9084af] active:scale-[0.95];
 }
