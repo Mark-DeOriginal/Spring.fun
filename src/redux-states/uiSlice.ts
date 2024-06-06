@@ -5,11 +5,17 @@ interface UIState {
   theme: string;
   modal: {
     open?: boolean;
-    show?: boolean;
+    backdropCanClose?: boolean;
     content?: string;
     marginTop?: string;
     width?: string;
     extraStyles?: string;
+  };
+  drawer: {
+    open?: boolean;
+    backdropCanClose?: boolean;
+    content?: string;
+    height?: number | null;
   };
 }
 
@@ -17,11 +23,17 @@ const initialState: UIState = {
   theme: getTheme(),
   modal: {
     open: false,
-    show: false,
-    content: "WELCOME_SCREEN",
-    width: "w-[400px]",
-    marginTop: "mt-[28px]",
+    backdropCanClose: true,
+    content: "",
+    width: "",
+    marginTop: "",
     extraStyles: "",
+  },
+  drawer: {
+    open: false,
+    backdropCanClose: true,
+    content: "",
+    height: null,
   },
 };
 
@@ -36,7 +48,7 @@ const uiSlice = createSlice({
       state,
       action: PayloadAction<{
         open?: boolean;
-        show?: boolean;
+        backDropCanClose?: boolean;
         content?: string;
         marginTop?: string;
         width?: string;
@@ -54,10 +66,37 @@ const uiSlice = createSlice({
     setModalOpen(state, action: PayloadAction<boolean>) {
       state.modal.open = action.payload;
     },
+    setDrawerState(
+      state,
+      action: PayloadAction<{
+        open?: boolean;
+        backDropCanClose?: boolean;
+        content?: string;
+        height?: number;
+      }>
+    ) {
+      state.drawer = {
+        ...state.drawer,
+        ...action.payload,
+      };
+    },
+    toggleDrawerOpen(state) {
+      state.drawer.open = !state.drawer.open;
+    },
+    setDrawerOpen(state, action: PayloadAction<boolean>) {
+      state.drawer.open = action.payload;
+    },
   },
 });
 
-export const { setTheme, setModalState, toggleModalOpen, setModalOpen } =
-  uiSlice.actions;
+export const {
+  setTheme,
+  setModalState,
+  toggleModalOpen,
+  setModalOpen,
+  setDrawerState,
+  toggleDrawerOpen,
+  setDrawerOpen,
+} = uiSlice.actions;
 
 export default uiSlice.reducer;

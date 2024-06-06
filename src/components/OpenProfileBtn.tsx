@@ -1,49 +1,53 @@
 import { HamburgerIcon } from "../assets/icons";
-import { AppDispatch, RootState } from "../redux-states/store";
-import { useDispatch, useSelector } from "react-redux";
-import Menu from "./Menu";
-import { useState } from "react";
-import { setModalOpen, toggleModalOpen } from "../redux-states/uiSlice";
+import { AppDispatch } from "../redux-states/store";
+import { useDispatch } from "react-redux";
+import {
+  setDrawerOpen,
+  setDrawerState,
+  setModalOpen,
+  setModalState,
+} from "../redux-states/uiSlice";
 
 export default function OpenProfileBtn() {
   const dispatch: AppDispatch = useDispatch();
-  const [openProfile, setOpenProfile] = useState(false);
-  const modal = useSelector((state: RootState) => state.ui.modal);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    const profileBtn = document.querySelector(".profile-btn");
-    const menu = document.querySelector(".menu");
-
-    if (
-      profileBtn &&
-      !profileBtn.contains(event.target as Node) &&
-      menu &&
-      !menu.contains(event.target as Node)
-    ) {
-      setOpenProfile(false);
-    }
-  };
-
-  document.addEventListener("click", handleClickOutside);
 
   const handleResize = () => {
-    setOpenProfile(false);
+    // Close Drawer
+    dispatch(setDrawerOpen(false));
+    // Close Modal
     dispatch(setModalOpen(false));
+
+    document.removeEventListener("resize", handleResize);
   };
 
   const handleClick = () => {
-    // const browserWidth = window.innerWidth;
+    const browserWidth = window.innerWidth;
 
-    // if (browserWidth <= 480) {
-    //   dispatch(toggleModalOpen());
-    // } else {
-    //   setOpenProfile(!openProfile);
-    // }
-    dispatch(toggleModalOpen());
+    if (browserWidth <= 480) {
+      // Let's use up 80% of the browser height for the Drawer
+      const drawerHeight = (80 * window.innerHeight) / 100;
 
-    setOpenProfile(!openProfile);
+      dispatch(
+        setDrawerState({
+          open: true,
+          content: "USER_PROFILE",
+          height: drawerHeight,
+        })
+      );
+    } else {
+      // Open Modal
+      dispatch(
+        setModalState({
+          open: true,
+          content: "USER_PROFILE",
+          width: "w-[450px]",
+          marginTop: "mt-10",
+          extraStyles: "h-[90vh]",
+        })
+      );
+    }
 
-    // window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
   };
 
   return (
@@ -54,11 +58,6 @@ export default function OpenProfileBtn() {
           <HamburgerIcon className="hamburger-icon" />
         </div>
       </button>
-      {openProfile && (
-        <Menu className="menu absolute right-0 top-12 w-[400px] max-tablet-md:hidden">
-          {modal.content}
-        </Menu>
-      )}
     </>
   );
 }

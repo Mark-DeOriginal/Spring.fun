@@ -1,3 +1,4 @@
+import Drawer from "./Drawer";
 import Footer from "./Footer";
 import Header from "./Header";
 import Modal from "./Modal";
@@ -8,6 +9,7 @@ export default function Layout({ children }: any) {
       <Header />
       <main className="py-6 page-px">{children}</main>
       <Modal />
+      <Drawer />
       <Footer />
     </>
   );
