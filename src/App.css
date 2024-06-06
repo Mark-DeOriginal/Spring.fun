@@ -21,6 +21,11 @@ button {
   @apply select-none;
 }
 
+button,
+input {
+  @apply outline-none;
+}
+
 .hamburger {
   @apply bg-springGrayBlue-100 dark:bg-springBlueLight-400 rounded-full w-8 h-8 flex items-center justify-center;
 }
@@ -37,25 +42,74 @@ button {
 }
 
 .popup-menu {
-  @apply bg-offWhite dark:bg-springBlueLight-400 text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-4 rounded-3xl;
+  @apply bg-offWhite dark:bg-[#423c52] text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-4 rounded-3xl;
 }
 
-.modal {
-  @apply relative;
+.modal-container::-webkit-scrollbar {
+  display: none;
 }
-
 .modal-container {
-  @apply fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center max-tablet-md:items-end z-[100] overflow-y-auto;
+  @apply fixed top-0 left-0 right-0 bottom-0 flex bg-springBlue/90 items-start justify-center max-tablet-md:items-end z-[100] overflow-y-auto;
+  will-change: auto;
 }
 
-.modal .modal-backdrop {
-  @apply fixed top-0 left-0 right-0 bottom-0 bg-springBlue/80;
+.modal-container .modal-dialog {
+  @apply relative bg-offWhite mt-28 dark:bg-[#423c52] text-springBlueLight-300 dark:text-springBluishWhite shadow-modalShadow px-5 pt-6 pb-4 rounded-3xl;
+  will-change: auto;
 }
 
-.modal .modal-dialog {
-  @apply relative bg-offWhite mt-28 dark:bg-springBlueLight-400 text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-4 rounded-3xl max-tablet-md:rounded-b-none max-tablet-md:h-[500px] max-tablet-md:w-full;
+.modal-container .modal-dialog-mobile-style {
+  @apply max-tablet-md:absolute max-tablet-md:rounded-b-none max-tablet-md:h-[75vh];
+  @apply max-tablet-md:w-[100vw] max-tablet-md:bottom-0;
+}
+
+.modal-container .modal-dialog::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-close-btn {
   @apply absolute top-3 right-4 p-2 rounded-full w-8 h-8 flex items-center text-2xl justify-center bg-springGrayBlue-100 dark:bg-[#58506d] dark:text-[#9084af] active:scale-[0.95];
+}
+
+/*
+Modal animation classes
+*/
+/* Enter State (combined .modal-container-anim-enter and .modal-container-anim-enter-active) */
+.modal-container-appear {
+  opacity: 0;
+}
+
+.modal-container-appear-active {
+  opacity: 1; /* Final state: visible */
+  transition: opacity 300ms ease-in-out; /* Transition for opacity */
+}
+
+/* Exit State (combined .modal-container-anim-exit and .modal-container-anim-exit-active) */
+.modal-container-exit {
+  opacity: 1; /* Initial state: visible */
+}
+
+.modal-container-exit-active {
+  opacity: 0; /* Final state: hidden */
+  transition: opacity 300ms 600ms ease-in-out; /* Transition with delay */
+}
+
+/* Enter State (combined .modal-dialog-anim-enter and .modal-dialog-anim-enter-active) */
+.modal-dialog-appear {
+  transform: translateY(100%); /* Initial state: off-screen */
+}
+
+.modal-dialog-appear-active {
+  transform: translateY(0%); /* Final state: on-screen */
+  transition: transform 600ms 300ms ease-in-out; /* Transition with delay */
+}
+
+/* Exit State (combined .modal-dialog-anim-exit and .modal-dialog-anim-exit-active) */
+.modal-dialog-exit {
+  transform: translateY(0%); /* Initial state: on-screen */
+  transition: transform 600ms ease-in-out; /* Transition */
+}
+
+.modal-dialog-exit-active {
+  transform: translateY(100%); /* Final state: off-screen */
 }

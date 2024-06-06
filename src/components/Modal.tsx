@@ -1,44 +1,67 @@
-import ReactDOM from "react-dom";
-import { useSelector } from "react-redux";
-import { RootState, store } from "../redux-states/store";
+import { useRef } from "react";
+import { createPortal } from "react-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { CSSTransition } from "react-transition-group";
+
+import { RootState } from "../redux-states/store";
 import { setModalOpen } from "../redux-states/uiSlice";
 
 export default function Modal() {
-  // Load required data from our redux store
+  const dispatch = useDispatch();
   const modal = useSelector((state: RootState) => state.ui.modal);
-
   const modalRoot = document.getElementById("modal-root");
 
-  if (!modalRoot) return null;
+  const modalRef = useRef(null);
+  const dialogRef = useRef(null);
+
+  if (!modalRoot) return null; // Ensure modalRoot exists before proceeding
 
   const closeModal = () => {
-    document.body.style.overflowY = "auto";
-    store.dispatch(setModalOpen(false));
+    dispatch(setModalOpen(false));
   };
 
-  return (
-    modal.open &&
-    modal.show &&
-    ReactDOM.createPortal(
-      <div className={`modal`} role="dialog" aria-modal="true" tabIndex={-1}>
-        <div className="modal-container">
-          <div className="modal-backdrop" onClick={() => closeModal()}></div>
+  return createPortal(
+    <CSSTransition
+      nodeRef={modalRef}
+      in={modal.open}
+      timeout={1000}
+      classNames="modal-container"
+      unmountOnExit
+      appear
+    >
+      <div
+        ref={modalRef}
+        className="modal-container"
+        role="dialog"
+        aria-modal="true"
+        onClick={closeModal}
+      >
+        {/* Dialog */}
+        <CSSTransition
+          nodeRef={dialogRef}
+          in={modal.open}
+          timeout={1000}
+          unmountOnExit
+          classNames="modal-dialog"
+          appear
+        >
           <div
-            className={`${modal.marginTop} ${modal.width} ${modal.extraStyles} modal-dialog`}
+            ref={dialogRef}
+            className={`modal-dialog modal-dialog-mobile-style ${modal.marginTop} ${modal.width} ${modal.extraStyles}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
               className="modal-close-btn"
-              onClick={() => closeModal()}
+              onClick={closeModal}
               aria-label="Close modal"
             >
               &times;
             </button>
             <div className="modal-content">{modal.content}</div>
           </div>
-        </div>
-      </div>,
-      modalRoot
-    )
+        </CSSTransition>
+      </div>
+    </CSSTransition>,
+    modalRoot
   );
 }

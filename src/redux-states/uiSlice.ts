@@ -54,18 +54,10 @@ const uiSlice = createSlice({
     setModalOpen(state, action: PayloadAction<boolean>) {
       state.modal.open = action.payload;
     },
-    setModalShow(state, action: PayloadAction<boolean>) {
-      state.modal.show = action.payload;
-    },
   },
 });
 
-export const {
-  setTheme,
-  setModalState,
-  toggleModalOpen,
-  setModalOpen,
-  setModalShow,
-} = uiSlice.actions;
+export const { setTheme, setModalState, toggleModalOpen, setModalOpen } =
+  uiSlice.actions;
 
 export default uiSlice.reducer;

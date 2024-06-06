@@ -34,6 +34,7 @@ export default {
         navShadow: "0 4px 11px -1px rgb(0 0 0 / 8%)",
         cardShadow: "0px 4px 11px 1px #0000000a",
         popupShadow: "0px 1px 2px 1px #00000029",
+        modalShadow: "0px -1px 4px 1px #22202838",
       },
     },
   },
