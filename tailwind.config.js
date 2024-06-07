@@ -21,10 +21,10 @@ export default {
         springGreen: {
           100: "#d7e68a",
         },
-        offWhite: "#f5f5ff",
+        offWhite: "#ededf2",
       },
       screens: {
-        "tablet-sm": "380px",
+        "tablet-sm": "400px",
         "tablet-md": "480px",
         tablet: "520px",
         "tablet-lg": "760px",

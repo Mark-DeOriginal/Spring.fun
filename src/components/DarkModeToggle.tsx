@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux-states/store";
 import { setTheme } from "../redux-states/uiSlice";
 import { useEffect } from "react";
-import applyTheme from "../utilities/applyTheme";
+import applyTheme from "../helpers/applyTheme";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 
 export default function DarkModeToggle() {

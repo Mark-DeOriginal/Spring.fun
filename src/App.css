@@ -76,5 +76,21 @@ input {
 }
 
 .drawer-handle {
-  @apply absolute top-3 right-[50%] translate-x-[50%] w-9 h-[6px] rounded-full bg-[#bfbbcb] dark:bg-[#423c52];
+  @apply absolute top-3 right-[50%] translate-x-[50%] w-9 h-[6px] rounded-full bg-[#bfbbcb] dark:bg-[#474158];
+}
+
+p + p {
+  @apply mt-2;
+}
+
+body {
+  @apply text-base tablet-sm:text-lg;
+}
+
+body.light {
+  @apply bg-offWhite text-springBlueLight-400;
+}
+
+body.dark {
+  @apply bg-springBlue text-springBlueLight-100;
 }

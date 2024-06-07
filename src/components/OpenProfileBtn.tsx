@@ -1,37 +1,20 @@
 import { HamburgerIcon } from "../assets/icons";
 import { AppDispatch } from "../redux-states/store";
 import { useDispatch } from "react-redux";
-import {
-  setDrawerOpen,
-  setDrawerState,
-  setModalOpen,
-  setModalState,
-} from "../redux-states/uiSlice";
+import { setDrawerState, setModalState } from "../redux-states/uiSlice";
 
 export default function OpenProfileBtn() {
   const dispatch: AppDispatch = useDispatch();
-
-  const handleResize = () => {
-    // Close Drawer
-    dispatch(setDrawerOpen(false));
-    // Close Modal
-    dispatch(setModalOpen(false));
-
-    document.removeEventListener("resize", handleResize);
-  };
 
   const handleClick = () => {
     const browserWidth = window.innerWidth;
 
     if (browserWidth <= 480) {
-      // Let's use up 80% of the browser height for the Drawer
-      const drawerHeight = (80 * window.innerHeight) / 100;
-
       dispatch(
         setDrawerState({
           open: true,
-          content: "USER_PROFILE",
-          height: drawerHeight,
+          backdropCanClose: true,
+          viewName: "USER_PROFILE",
         })
       );
     } else {
@@ -39,15 +22,13 @@ export default function OpenProfileBtn() {
       dispatch(
         setModalState({
           open: true,
-          content: "USER_PROFILE",
-          width: "w-[450px]",
+          viewName: "USER_PROFILE",
+          width: "w-[400px]",
           marginTop: "mt-10",
           extraStyles: "h-[90vh]",
         })
       );
     }
-
-    window.addEventListener("resize", handleResize);
   };
 
   return (

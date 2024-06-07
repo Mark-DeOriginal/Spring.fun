@@ -5,6 +5,7 @@ import { useSpring, animated, config } from "@react-spring/web";
 
 import { RootState } from "../redux-states/store";
 import { setModalOpen } from "../redux-states/uiSlice";
+import GetView from "./GetView";
 
 export default function Modal() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function Modal() {
   };
 
   const handleBackDropClick = () => {
-    if (modal.backdropCanClose != false) {
+    if (modal.backdropCanClose !== false) {
       handleClose();
     }
   };
@@ -48,6 +49,13 @@ export default function Modal() {
     }
   }, [modal.open]);
 
+  const handleResize = () => {
+    handleClose();
+    window.removeEventListener("resize", handleResize);
+  };
+
+  window.addEventListener("resize", handleResize);
+
   if (!modalRoot || !isMounted) return null;
 
   return createPortal(
@@ -70,7 +78,9 @@ export default function Modal() {
         >
           &times;
         </button>
-        <div className="modal-content">{modal.content}</div>
+        <div className="modal-content">
+          <GetView viewName={modal.viewName} />
+        </div>
       </animated.div>
     </animated.div>,
     modalRoot

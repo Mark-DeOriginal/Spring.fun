@@ -1,21 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import getTheme from "../utilities/getTheme";
+import getTheme from "../helpers/getTheme";
 
 interface UIState {
   theme: string;
   modal: {
-    open?: boolean;
-    backdropCanClose?: boolean;
-    content?: string;
-    marginTop?: string;
-    width?: string;
-    extraStyles?: string;
+    open: boolean;
+    backdropCanClose: boolean;
+    viewName: string;
+    marginTop: string;
+    width: string;
+    extraStyles: string;
   };
   drawer: {
-    open?: boolean;
-    backdropCanClose?: boolean;
-    content?: string;
-    height?: number | null;
+    open: boolean;
+    backdropCanClose: boolean;
+    viewName: string;
   };
 }
 
@@ -24,7 +23,7 @@ const initialState: UIState = {
   modal: {
     open: false,
     backdropCanClose: true,
-    content: "",
+    viewName: "",
     width: "",
     marginTop: "",
     extraStyles: "",
@@ -32,8 +31,7 @@ const initialState: UIState = {
   drawer: {
     open: false,
     backdropCanClose: true,
-    content: "",
-    height: null,
+    viewName: "",
   },
 };
 
@@ -48,8 +46,8 @@ const uiSlice = createSlice({
       state,
       action: PayloadAction<{
         open?: boolean;
-        backDropCanClose?: boolean;
-        content?: string;
+        backdropCanClose?: boolean;
+        viewName?: string;
         marginTop?: string;
         width?: string;
         extraStyles?: string;
@@ -70,9 +68,8 @@ const uiSlice = createSlice({
       state,
       action: PayloadAction<{
         open?: boolean;
-        backDropCanClose?: boolean;
-        content?: string;
-        height?: number;
+        backdropCanClose?: boolean;
+        viewName?: string;
       }>
     ) {
       state.drawer = {

@@ -6,6 +6,7 @@ import { useDrag } from "react-use-gesture";
 
 import { RootState } from "../redux-states/store";
 import { setDrawerOpen } from "../redux-states/uiSlice";
+import GetView from "./GetView";
 
 export const showDrawerCloseBtn = () => {
   return false;
@@ -16,7 +17,23 @@ export default function Drawer() {
   const drawer = useSelector((state: RootState) => state.ui.drawer);
   const drawerRoot = document.getElementById("drawer-root");
 
-  const maxHeight = drawer.height || 400;
+  const [isMounted, setIsMounted] = useState(false);
+
+  const drawerElement = document.querySelector(".drawer");
+
+  const drawerElementPaddingY = () => {
+    return (
+      drawerElement &&
+      parseFloat(getComputedStyle(drawerElement).paddingTop) +
+        parseFloat(getComputedStyle(drawerElement!).paddingBottom)
+    );
+  };
+
+  const drawerContentElement = document.querySelector(".drawer-content")!;
+
+  const maxHeight =
+    drawerContentElement?.scrollHeight + drawerElementPaddingY()! ||
+    (80 * window.innerWidth) / 100;
 
   const [{ y }, setY] = useSpring(() => ({ y: maxHeight }));
   const [{ opacity }, setOpacity] = useSpring(() => ({ opacity: 0 }));
@@ -42,6 +59,7 @@ export default function Drawer() {
 
   useEffect(() => {
     if (drawer.open) {
+      setIsMounted(true);
       setOpacity({ opacity: 1 });
       setY({ y: 0, onRest: () => setIsAnimating(false) });
     }
@@ -54,20 +72,32 @@ export default function Drawer() {
       onRest: () =>
         setOpacity({
           opacity: 0,
-          onRest: () => dispatch(setDrawerOpen(false)),
+          onRest: () => finalizeClose(),
         }),
     });
   };
 
+  const finalizeClose = () => {
+    dispatch(setDrawerOpen(false));
+    setIsMounted(false);
+  };
+
   const handleBackdropClick = (e: React.MouseEvent) => {
-    if (drawer.backdropCanClose != false) {
+    if (drawer.backdropCanClose !== false) {
       if (e.target === e.currentTarget && !isAnimating) {
         closeDrawer();
       }
     }
   };
 
-  if (!drawer.open && !opacity.isAnimating) return null;
+  const handleResize = () => {
+    closeDrawer();
+    window.removeEventListener("resize", handleResize);
+  };
+
+  window.addEventListener("resize", handleResize);
+
+  if (!drawer.open && !isMounted && !opacity.isAnimating) return null;
 
   return createPortal(
     <animated.div
@@ -94,8 +124,9 @@ export default function Drawer() {
             &times;
           </button>
         )}
-
-        {drawer.content}
+        <div className="drawer-content">
+          <GetView viewName={drawer.viewName} />
+        </div>
       </animated.div>
     </animated.div>,
     drawerRoot!
