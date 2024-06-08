@@ -15,6 +15,8 @@ export default function OpenProfileBtn() {
           open: true,
           backdropCanClose: true,
           viewName: "USER_PROFILE",
+          height: "auto",
+          isResized: true,
         })
       );
     } else {

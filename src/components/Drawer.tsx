@@ -20,28 +20,31 @@ export default function Drawer() {
   const [isMounted, setIsMounted] = useState(false);
 
   const drawerElement = document.querySelector(".drawer");
+  const drawerContent = document.querySelector(".drawer-content");
 
-  const drawerElementPaddingY = () => {
-    return (
+  const getDrawerHeight = () => {
+    const drawerElementPaddingY =
       drawerElement &&
       parseFloat(getComputedStyle(drawerElement).paddingTop) +
-        parseFloat(getComputedStyle(drawerElement!).paddingBottom)
-    );
+        parseFloat(getComputedStyle(drawerElement!).paddingBottom);
+
+    return typeof drawer.height === "number"
+      ? drawer.height
+      : (drawerContent &&
+          drawerContent.scrollHeight + drawerElementPaddingY!) ||
+          (80 * window.innerWidth) / 100;
   };
 
-  const drawerContentElement = document.querySelector(".drawer-content")!;
-
-  const maxHeight =
-    drawerContentElement?.scrollHeight + drawerElementPaddingY()! ||
-    (80 * window.innerWidth) / 100;
-
-  const [{ y }, setY] = useSpring(() => ({ y: maxHeight }));
+  const [{ y }, setY] = useSpring(() => ({ y: getDrawerHeight() }));
+  const [{ height }, setHeight] = useSpring(() => ({
+    height: getDrawerHeight(),
+  }));
   const [{ opacity }, setOpacity] = useSpring(() => ({ opacity: 0 }));
   const [isAnimating, setIsAnimating] = useState(false);
 
   const bind = useDrag(
     ({ down, movement: [, my], velocity }) => {
-      const trigger = maxHeight * 0.5;
+      const trigger = height.get() * 0.5;
       const closingVelocity = 20;
 
       if (!down) {
@@ -60,15 +63,37 @@ export default function Drawer() {
   useEffect(() => {
     if (drawer.open) {
       setIsMounted(true);
-      setOpacity({ opacity: 1 });
-      setY({ y: 0, onRest: () => setIsAnimating(false) });
+      setOpacity({
+        opacity: 1,
+      });
+      setHeight({ height: getDrawerHeight(), immediate: true });
+      setY({
+        y: 0,
+        onRest: () => setIsAnimating(false),
+      });
     }
-  }, [drawer.open, setY, setOpacity]);
+  }, [drawer.open, drawerElement]);
+
+  useEffect(() => {
+    if (drawer.isResized) {
+      setIsAnimating(true);
+      setY({
+        y: height.get(),
+        onRest: () => {
+          setHeight({ height: getDrawerHeight(), immediate: true }),
+            setY({
+              y: 0,
+              onRest: () => setIsAnimating(false),
+            });
+        },
+      });
+    }
+  }, [drawer.isResized, drawer.height]);
 
   const closeDrawer = () => {
     setIsAnimating(true);
     setY({
-      y: maxHeight,
+      y: height.get(),
       onRest: () =>
         setOpacity({
           opacity: 0,
@@ -100,35 +125,37 @@ export default function Drawer() {
   if (!drawer.open && !isMounted && !opacity.isAnimating) return null;
 
   return createPortal(
-    <animated.div
-      className="drawer-backdrop"
-      style={{ opacity }}
-      onClick={handleBackdropClick}
-    >
+    <div className="drawer-container">
       <animated.div
-        {...bind()}
-        style={{
-          transform: y.to((y) => `translateY(${y}px)`),
-          height: maxHeight,
-        }}
-        className="drawer"
-        onClick={(e) => e.stopPropagation()}
+        className="drawer-backdrop"
+        style={{ opacity }}
+        onClick={handleBackdropClick}
       >
-        <div className="drawer-handle"></div>
-        {showDrawerCloseBtn() && (
-          <button
-            className="drawer-close-btn"
-            onClick={closeDrawer}
-            aria-label="Close modal"
-          >
-            &times;
-          </button>
-        )}
-        <div className="drawer-content">
-          <GetView viewName={drawer.viewName} />
-        </div>
+        <animated.div
+          {...bind()}
+          style={{
+            transform: y.to((y) => `translateY(${y}px)`),
+            height: height,
+          }}
+          className="drawer"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="drawer-handle"></div>
+          {showDrawerCloseBtn() && (
+            <button
+              className="drawer-close-btn"
+              onClick={closeDrawer}
+              aria-label="Close modal"
+            >
+              &times;
+            </button>
+          )}
+          <div className="drawer-content">
+            <GetView viewName={drawer.viewName} />
+          </div>
+        </animated.div>
       </animated.div>
-    </animated.div>,
+    </div>,
     drawerRoot!
   );
 }

@@ -15,6 +15,8 @@ interface UIState {
     open: boolean;
     backdropCanClose: boolean;
     viewName: string;
+    height: number | "auto";
+    isResized: boolean;
   };
 }
 
@@ -32,6 +34,8 @@ const initialState: UIState = {
     open: false,
     backdropCanClose: true,
     viewName: "",
+    height: "auto",
+    isResized: false,
   },
 };
 
@@ -70,6 +74,8 @@ const uiSlice = createSlice({
         open?: boolean;
         backdropCanClose?: boolean;
         viewName?: string;
+        height?: number | "auto";
+        isResized: boolean;
       }>
     ) {
       state.drawer = {
@@ -83,6 +89,9 @@ const uiSlice = createSlice({
     setDrawerOpen(state, action: PayloadAction<boolean>) {
       state.drawer.open = action.payload;
     },
+    setDrawerHeight(state, action: PayloadAction<number>) {
+      state.drawer.height = action.payload;
+    },
   },
 });
 
@@ -94,6 +103,7 @@ export const {
   setDrawerState,
   toggleDrawerOpen,
   setDrawerOpen,
+  setDrawerHeight,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

@@ -80,7 +80,7 @@ input {
 }
 
 p + p {
-  @apply mt-2;
+  @apply mt-3;
 }
 
 body {
