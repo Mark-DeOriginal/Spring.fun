@@ -17,11 +17,12 @@ export const UserWelcome = () => {
 
       <div className="body text-springBlueLight-400 dark:text-springBlueLight-100 text-center font-medium">
         <p className="font-bold">
-          We are a Hybrid Decentralized Exchange (HDEX) on the TON Blockchain.
+          Spring is a Hybrid Decentralized Exchange (HDEX) on the TON
+          Blockchain.
         </p>
         <VBlock />
         <p>
-          Spring allows you execute trades almost instantly without network
+          Spring allows you execute trades almost instantly without blockchain
           delay.
         </p>
         <p>
