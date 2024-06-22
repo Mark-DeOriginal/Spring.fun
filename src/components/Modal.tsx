@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useSpring, animated, config } from "@react-spring/web";
 
 import { RootState } from "../redux-states/store";
-import { setModalOpen } from "../redux-states/uiSlice";
-import GetView from "./GetView";
+import GetView from "../helpers/GetView";
+import useUpdateUrl from "../actions/updateURLParams";
 
 export default function Modal() {
-  const dispatch = useDispatch();
+  const updateUrlParams = useUpdateUrl();
+
   const modal = useSelector((state: RootState) => state.ui.modal);
   const modalRoot = document.getElementById("modal-root");
 
   const [isMounted, setIsMounted] = useState(false);
 
   const handleClose = () => {
-    dispatch(setModalOpen(false));
+    updateUrlParams({ "top-menu": null, view: null });
   };
 
   const handleBackDropClick = () => {
@@ -33,7 +34,10 @@ export default function Modal() {
     opacity: modal.open ? 1 : 0,
     config: backDropAnimConfig,
     onRest: () => {
-      if (!modal.open) setIsMounted(false);
+      if (!modal.open) {
+        handleClose();
+        setIsMounted(false);
+      }
     },
   });
 
@@ -50,7 +54,9 @@ export default function Modal() {
   }, [modal.open]);
 
   const handleResize = () => {
-    handleClose();
+    if (modal.open) {
+      handleClose();
+    }
     window.removeEventListener("resize", handleResize);
   };
 
@@ -64,6 +70,13 @@ export default function Modal() {
       style={backdropSpring}
       onClick={handleBackDropClick}
     >
+      <button
+        className="modal-close-btn"
+        onClick={handleClose}
+        aria-label="Close modal"
+      >
+        &times;
+      </button>
       <animated.div
         className={`modal-dialog ${modal.marginTop} ${modal.width} ${modal.extraStyles}`}
         style={dialogSpring}
@@ -71,13 +84,6 @@ export default function Modal() {
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="modal-close-btn"
-          onClick={handleClose}
-          aria-label="Close modal"
-        >
-          &times;
-        </button>
         <div className="modal-content">
           <GetView viewName={modal.viewName} />
         </div>

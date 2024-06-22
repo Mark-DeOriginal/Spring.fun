@@ -75,7 +75,7 @@ const uiSlice = createSlice({
         backdropCanClose?: boolean;
         viewName?: string;
         height?: number | "auto";
-        isResized: boolean;
+        isResized?: boolean;
       }>
     ) {
       state.drawer = {
