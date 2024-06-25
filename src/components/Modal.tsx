@@ -5,18 +5,17 @@ import { useSpring, animated, config } from "@react-spring/web";
 
 import { RootState } from "../redux-states/store";
 import GetView from "../helpers/GetView";
-import useUpdateUrl from "../actions/updateURLParams";
+import closeTopMenu from "../actions/closeTopMenu";
+import "../styles/modal.css";
 
 export default function Modal() {
-  const updateUrlParams = useUpdateUrl();
-
   const modal = useSelector((state: RootState) => state.ui.modal);
   const modalRoot = document.getElementById("modal-root");
 
   const [isMounted, setIsMounted] = useState(false);
 
   const handleClose = () => {
-    updateUrlParams({ "top-menu": null, view: null });
+    closeTopMenu();
   };
 
   const handleBackDropClick = () => {
@@ -25,17 +24,10 @@ export default function Modal() {
     }
   };
 
-  const backDropAnimConfig = {
-    tension: 210,
-    friction: 20,
-  };
-
   const backdropSpring = useSpring({
     opacity: modal.open ? 1 : 0,
-    config: backDropAnimConfig,
     onRest: () => {
       if (!modal.open) {
-        handleClose();
         setIsMounted(false);
       }
     },
@@ -70,21 +62,25 @@ export default function Modal() {
       style={backdropSpring}
       onClick={handleBackDropClick}
     >
-      <button
-        className="modal-close-btn"
-        onClick={handleClose}
-        aria-label="Close modal"
-      >
-        &times;
-      </button>
       <animated.div
-        className={`modal-dialog ${modal.marginTop} ${modal.width} ${modal.extraStyles}`}
+        className={`modal-dialog ${modal.dialogStyles}`}
         style={dialogSpring}
         role="dialog"
         aria-modal="true"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="modal-content">
+        <button
+          className="modal-close-btn"
+          onClick={handleClose}
+          aria-label="Close modal"
+        >
+          &times;
+        </button>
+        <div
+          className={`modal-content ${
+            modal.textAlign ? `text-${modal.textAlign}` : ""
+          }`}
+        >
           <GetView viewName={modal.viewName} />
         </div>
       </animated.div>

@@ -6,7 +6,8 @@ import { useDrag } from "react-use-gesture";
 
 import { RootState } from "../redux-states/store";
 import GetView from "../helpers/GetView";
-import useUpdateUrl from "../actions/updateURLParams";
+import closeTopMenu from "../actions/closeTopMenu";
+import "../styles/drawer.css";
 
 export const showDrawerCloseBtn = () => {
   return false;
@@ -19,9 +20,9 @@ export const sleep = (duration: number): Promise<void> => {
 };
 
 export default function Drawer() {
-  const updateUrlParams = useUpdateUrl();
   const drawer = useSelector((state: RootState) => state.ui.drawer);
   const drawerRoot = document.getElementById("drawer-root");
+  const [viewName, setViewName] = useState(drawer.viewName);
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -76,32 +77,40 @@ export default function Drawer() {
 
   useEffect(() => {
     if (drawer.open) {
-      const prepareDrawer = async () => {
-        setIsMounted(true);
-        await sleep(0);
+      setViewName(drawer.viewName);
+      setIsMounted(true);
+      sleep(0).then(() => {
         const calculatedHeight = getDrawerHeight();
         setDrawerHeight({ height: calculatedHeight, immediate: true });
         setY({ y: calculatedHeight, immediate: true });
         setOpacity({ drawerBackdropOpacity: 1 });
         setY({ y: 0 });
-      };
-
-      prepareDrawer();
+      });
     } else {
       closeDrawer();
     }
   }, [drawer.open]);
 
   useEffect(() => {
-    const newHeight = getDrawerHeight();
+    let newHeight = getDrawerHeight();
 
     if (drawer.open) {
-      setDrawerHeight({
-        height: newHeight,
-        immediate: false,
+      setY({
+        y: height.get(),
+        onRest: () => {
+          setViewName(drawer.viewName);
+          sleep(0).then(() => {
+            newHeight = getDrawerHeight();
+            setDrawerHeight({
+              height: newHeight,
+              immediate: true,
+              onRest: () => setY({ y: 0 }),
+            });
+          });
+        },
       });
     }
-  }, [drawer.height, drawer.viewName]);
+  }, [drawer.viewName]);
 
   const closeDrawer = () => {
     setY({
@@ -116,9 +125,7 @@ export default function Drawer() {
 
   const finalizeClose = () => {
     setIsMounted(false);
-
-    // Update the URL to remove query params
-    updateUrlParams({ "top-menu": null, view: null });
+    closeTopMenu();
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
@@ -130,14 +137,15 @@ export default function Drawer() {
   };
 
   const handleResize = () => {
+    setIsMounted(false);
     closeDrawer();
-    window.removeEventListener("resize", handleResize);
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    if (drawer.open) {
+      window.addEventListener("resize", handleResize);
+    }
+  }, [drawer.open]);
 
   if (!drawer.open && !isMounted) return null;
 
@@ -169,11 +177,13 @@ export default function Drawer() {
             </button>
           )}
           <animated.div
-            className="drawer-content"
+            className={`drawer-content ${
+              drawer.textAlign ? `text-${drawer.textAlign}` : ""
+            }`}
             ref={drawerContent}
             style={{ opacity: drawerContentOpacity }}
           >
-            <GetView viewName={drawer.viewName} />
+            <GetView viewName={viewName} />
           </animated.div>
         </animated.div>
       </animated.div>

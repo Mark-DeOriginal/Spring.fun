@@ -9,12 +9,14 @@ interface UIState {
     viewName: string;
     marginTop: string;
     width: string;
-    extraStyles: string;
+    dialogStyles: string;
+    textAlign: string;
   };
   drawer: {
     open: boolean;
     backdropCanClose: boolean;
     viewName: string;
+    textAlign: string;
     height: number | "auto";
     isResized: boolean;
   };
@@ -28,12 +30,14 @@ const initialState: UIState = {
     viewName: "",
     width: "",
     marginTop: "",
-    extraStyles: "",
+    dialogStyles: "",
+    textAlign: "",
   },
   drawer: {
     open: false,
     backdropCanClose: true,
     viewName: "",
+    textAlign: "",
     height: "auto",
     isResized: false,
   },
@@ -54,7 +58,8 @@ const uiSlice = createSlice({
         viewName?: string;
         marginTop?: string;
         width?: string;
-        extraStyles?: string;
+        dialogStyles?: string;
+        textAlign?: string;
       }>
     ) {
       state.modal = {
@@ -74,6 +79,7 @@ const uiSlice = createSlice({
         open?: boolean;
         backdropCanClose?: boolean;
         viewName?: string;
+        textAlign?: string;
         height?: number | "auto";
         isResized?: boolean;
       }>

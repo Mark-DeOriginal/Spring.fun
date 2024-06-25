@@ -13,12 +13,12 @@ const URLStateHandler: React.FC = () => {
 
     if (searchParams.has("top-menu") && viewName) {
       // Open modal and drawer
-      dispatch(setModalState({ open: true, viewName }));
-      dispatch(setDrawerState({ open: true, viewName }));
+      // dispatch(setModalState({ open: true, viewName }));
+      // dispatch(setDrawerState({ open: true, viewName }));
     } else {
       // Close modal and drawer
-      dispatch(setModalState({ open: false, viewName: "" }));
-      dispatch(setDrawerState({ open: false, viewName: "" }));
+      // dispatch(setModalState({ open: false, viewName: "" }));
+      // dispatch(setDrawerState({ open: false, viewName: "" }));
     }
   }, [location.search, dispatch]);
 

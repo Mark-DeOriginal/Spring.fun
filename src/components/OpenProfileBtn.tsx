@@ -1,13 +1,29 @@
-import useSetTopMenu from "../actions/setTopMenu";
 import { HamburgerIcon } from "../assets/icons";
+import { store } from "../redux-states/store";
+import { setDrawerState, setModalState } from "../redux-states/uiSlice";
 
 export default function OpenProfileBtn() {
-  const setTopMenu = useSetTopMenu();
-
   const isOnboarded = false;
 
   const handleClick = () => {
-    setTopMenu(isOnboarded ? "user_profile" : "user_welcome");
+    const viewName = isOnboarded ? "user_profile" : "user_welcome";
+
+    const browserWidth = window.innerWidth;
+
+    if (browserWidth >= 480) {
+      store.dispatch(
+        setModalState({
+          open: true,
+          viewName: viewName,
+          textAlign: "left",
+          dialogStyles: "w-[450px]",
+        })
+      );
+    } else {
+      store.dispatch(
+        setDrawerState({ open: true, viewName: viewName, textAlign: "center" })
+      );
+    }
   };
 
   return (

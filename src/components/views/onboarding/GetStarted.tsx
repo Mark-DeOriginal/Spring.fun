@@ -1,22 +1,20 @@
-import useSetTopMenu from "../../../actions/setTopMenu";
+import closeTopMenu from "../../../actions/closeTopMenu";
 import VBlock from "../../VBlock";
 
 export const GetStarted = () => {
-  const setTopMenu = useSetTopMenu();
-
   const goToProfile = () => {
-    setTopMenu("user_profile", true);
+    closeTopMenu();
   };
 
   return (
     <section className="get-started-section pb-6">
       <div className="header">
-        <h1 className="text-xl tablet-sm:text-2xl font-extrabold tracking-tight mb-4 text-center text-springBlueLight-400 dark:text-offWhite">
+        <h1 className="text-xl tablet-sm:text-2xl font-extrabold tracking-tight mb-4 text-springBlueLight-400 dark:text-offWhite">
           Get Started
         </h1>
       </div>
 
-      <div className="body text-springBlueLight-400 dark:text-springBlueLight-100 text-center font-medium">
+      <div className="body text-springBlueLight-400 dark:text-springBlueLight-100 font-medium">
         <p className="font-bold">
           To ensure you have total control of your funds, save your seed phrase
         </p>

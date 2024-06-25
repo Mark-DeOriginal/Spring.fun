@@ -45,39 +45,9 @@ input {
   @apply bg-offWhite dark:bg-[#423c52] text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-4 rounded-3xl;
 }
 
-.modal-container::-webkit-scrollbar {
-  display: none;
-}
-
-.modal-container {
-  @apply fixed top-0 left-0 right-0 bottom-0 flex bg-[#201e26c2] items-start justify-center z-[100] overflow-y-auto max-tablet-md:hidden;
-  will-change: auto;
-}
-
-.modal-container .modal-dialog {
-  @apply relative bg-[#dedde1] mt-10 mx-4 dark:bg-[#353042] text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-6 rounded-3xl h-[90vh] w-[400px] overflow-y-scroll;
-  will-change: auto;
-}
-
-.modal-container .modal-dialog::-webkit-scrollbar {
-  display: none;
-}
-
 .modal-close-btn,
 .drawer-close-btn {
   @apply absolute top-3 right-[12px] p-2 rounded-full w-8 h-8 flex items-center text-2xl justify-center bg-[#d0ced4] dark:bg-[#423c52] dark:text-[#9084af] active:scale-[0.95];
-}
-
-.drawer {
-  @apply absolute h-[400px] px-4 pt-10 shadow-modalShadow rounded-t-3xl bg-[#dedde1] dark:bg-[#353042] bottom-0 left-0 right-0 touch-none will-change-transform tablet-md:hidden;
-}
-
-.drawer-backdrop {
-  @apply fixed bg-[#201e26c2] flex items-end justify-center top-0 left-0 right-0 bottom-0 will-change-auto;
-}
-
-.drawer-handle {
-  @apply absolute top-3 right-[50%] translate-x-[50%] w-9 h-[6px] rounded-full bg-[#bfbbcb] dark:bg-[#474158];
 }
 
 p + p {

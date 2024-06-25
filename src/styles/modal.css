@@ -1,0 +1,17 @@
+.modal-container::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-container {
+  @apply fixed top-0 left-0 right-0 bottom-0 flex bg-[#201e26c2] items-start justify-center z-[100] overflow-y-auto;
+  will-change: auto;
+}
+
+.modal-container .modal-dialog {
+  @apply relative bg-[#dedde1] mt-10 mx-4 dark:bg-[#353042] text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-6 rounded-3xl overflow-y-scroll;
+  will-change: auto;
+}
+
+.modal-container .modal-dialog::-webkit-scrollbar {
+  display: none;
+}

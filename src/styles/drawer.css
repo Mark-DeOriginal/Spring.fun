@@ -1,0 +1,11 @@
+.drawer {
+  @apply absolute h-[400px] px-4 pt-10 shadow-modalShadow rounded-t-3xl bg-[#dedde1] dark:bg-[#353042] bottom-0 left-0 right-0 touch-none will-change-transform;
+}
+
+.drawer-backdrop {
+  @apply fixed bg-[#201e26c2] flex items-end justify-center top-0 left-0 right-0 bottom-0 will-change-auto;
+}
+
+.drawer-handle {
+  @apply absolute top-3 right-[50%] translate-x-[50%] w-9 h-[6px] rounded-full bg-[#bfbbcb] dark:bg-[#474158];
+}
