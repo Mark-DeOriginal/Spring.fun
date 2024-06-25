@@ -1,5 +1,5 @@
 .drawer {
-  @apply absolute h-[400px] px-4 pt-10 shadow-modalShadow rounded-t-3xl bg-[#dedde1] dark:bg-[#353042] bottom-0 left-0 right-0 touch-none will-change-transform;
+  @apply absolute h-[400px] px-4 pt-10 pb-6 shadow-modalShadow rounded-t-3xl bg-[#dedde1] dark:bg-[#353042] bottom-0 left-0 right-0 touch-none will-change-transform;
 }
 
 .drawer-backdrop {

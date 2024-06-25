@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setDrawerState, setModalState } from "../redux-states/uiSlice";
+// import { setDrawerState, setModalState } from "../redux-states/uiSlice";
 
 const URLStateHandler: React.FC = () => {
   const location = useLocation();

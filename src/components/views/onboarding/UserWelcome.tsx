@@ -7,7 +7,7 @@ export const UserWelcome = () => {
   };
 
   return (
-    <section className="user-welcome-section pb-6">
+    <section className="user-welcome-section">
       <div className="header">
         <h1 className="text-xl tablet-sm:text-2xl font-extrabold tracking-tight mb-4 text-springBlueLight-400 dark:text-offWhite">
           Welcome to Spring

@@ -7,7 +7,7 @@ export const GetStarted = () => {
   };
 
   return (
-    <section className="get-started-section pb-6">
+    <section className="get-started-section">
       <div className="header">
         <h1 className="text-xl tablet-sm:text-2xl font-extrabold tracking-tight mb-4 text-springBlueLight-400 dark:text-offWhite">
           Get Started

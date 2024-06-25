@@ -15,7 +15,7 @@ export default function OpenProfileBtn() {
         setModalState({
           open: true,
           viewName: viewName,
-          textAlign: "left",
+          textAlign: "center",
           dialogStyles: "w-[450px]",
         })
       );

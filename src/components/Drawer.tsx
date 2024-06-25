@@ -31,7 +31,8 @@ export default function Drawer() {
 
   const getDrawerHeight = () => {
     const drawerElementPaddingY = drawerElement.current
-      ? parseFloat(getComputedStyle(drawerElement.current).paddingTop)
+      ? parseFloat(getComputedStyle(drawerElement.current).paddingTop) +
+        parseFloat(getComputedStyle(drawerElement.current).paddingBottom)
       : 0;
 
     return typeof drawer.height === "number"
