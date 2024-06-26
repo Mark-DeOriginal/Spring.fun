@@ -2,17 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { useSpring, animated, config } from "@react-spring/web";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { RootState } from "../redux-states/store";
 import GetView from "../helpers/GetView";
 import closeTopMenu from "../actions/closeTopMenu";
 import "../styles/modal.css";
-
-export const sleep = (duration: number): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, duration);
-  });
-};
+import sleep from "../helpers/sleep";
 
 export default function Modal() {
   const modal = useSelector((state: RootState) => state.ui.modal);
@@ -24,8 +20,8 @@ export default function Modal() {
   const modalDialog = useRef<HTMLDivElement>(null);
   const modalContent = useRef<HTMLDivElement>(null);
 
-  const [{ opacity }, setOpacity] = useSpring(() => ({
-    opacity: 0,
+  const [{ modalOpacity }, setOpacity] = useSpring(() => ({
+    modalOpacity: 0,
   }));
 
   const [{ modalY }, setModalY] = useSpring(() => ({
@@ -49,11 +45,11 @@ export default function Modal() {
   }));
 
   const handleClose = () => {
-    setModalY({
+    setModalY.start({
       modalY: 50,
     });
-    setOpacity({
-      opacity: 0,
+    setOpacity.start({
+      modalOpacity: 0,
 
       onRest: () => {
         setIsMounted(false);
@@ -73,9 +69,12 @@ export default function Modal() {
       setViewName(modal.viewName);
       setIsMounted(true);
       sleep(0).then(() => {
-        setModalHeight({ modalHeight: getModalHeight(), immediate: true });
-        setOpacity({ opacity: 1 });
-        setModalY({ modalY: 0 });
+        setModalHeight.start({
+          modalHeight: getModalHeight(),
+          immediate: true,
+        });
+        setOpacity.start({ modalOpacity: 1 });
+        setModalY.start({ modalY: 0 });
       });
     } else {
       handleClose();
@@ -86,33 +85,20 @@ export default function Modal() {
     if (modal.open) {
       setViewName(modal.viewName);
       sleep(0).then(() => {
-        setModalHeight({
+        setModalHeight.start({
           modalHeight: getModalHeight(),
-          config: { duration: 300 },
+          config: { tension: 300 },
         });
       });
     }
   }, [modal.viewName]);
-
-  const handleResize = () => {
-    handleClose();
-  };
-
-  useEffect(() => {
-    if (modal.open) {
-      window.addEventListener("resize", handleResize);
-    } else {
-      window.removeEventListener("resize", handleResize);
-    }
-    return () => window.removeEventListener("resize", handleResize);
-  }, [modal.open]);
 
   if (!modalRoot || !isMounted) return null;
 
   return createPortal(
     <animated.div
       className="modal-container"
-      style={{ opacity }}
+      style={{ opacity: modalOpacity }}
       onClick={handleBackDropClick}
     >
       <animated.div
@@ -121,7 +107,6 @@ export default function Modal() {
         style={{
           transform: modalY.to((y) => `translateY(${y}px)`),
           height: modalHeight,
-          opacity,
         }}
         role="dialog"
         aria-modal="true"
@@ -134,12 +119,30 @@ export default function Modal() {
         >
           &times;
         </button>
-        <div
-          ref={modalContent}
-          className={`modal-content ${modal.textAlign ? modal.textAlign : ""}`}
-        >
-          <GetView viewName={viewName} />
-        </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={viewName}
+            ref={modalContent}
+            className={`modal-content ${
+              modal.textAlign ? modal.textAlign : ""
+            }`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onAnimationStart={() =>
+              sleep(0).then(() => {
+                setModalHeight.start({
+                  modalHeight: getModalHeight(),
+                  config: { tension: 300 },
+                });
+              })
+            }
+          >
+            <GetView viewName={viewName} />
+          </motion.div>
+        </AnimatePresence>
       </animated.div>
     </animated.div>,
     modalRoot

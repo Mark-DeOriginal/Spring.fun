@@ -8,15 +8,10 @@ import { RootState } from "../redux-states/store";
 import GetView from "../helpers/GetView";
 import closeTopMenu from "../actions/closeTopMenu";
 import "../styles/drawer.css";
+import sleep from "../helpers/sleep";
 
 export const showDrawerCloseBtn = () => {
   return false;
-};
-
-export const sleep = (duration: number): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, duration);
-  });
 };
 
 export default function Drawer() {
@@ -82,10 +77,10 @@ export default function Drawer() {
       setIsMounted(true);
       sleep(0).then(() => {
         const calculatedHeight = getDrawerHeight();
-        setDrawerHeight({ height: calculatedHeight, immediate: true });
-        setY({ y: calculatedHeight, immediate: true });
-        setOpacity({ drawerBackdropOpacity: 1 });
-        setY({ y: 0 });
+        setDrawerHeight.start({ height: calculatedHeight, immediate: true });
+        setY.start({ y: calculatedHeight, immediate: true });
+        setOpacity.start({ drawerBackdropOpacity: 1 });
+        setY.start({ y: 0 });
       });
     } else {
       closeDrawer();
@@ -96,13 +91,13 @@ export default function Drawer() {
     let newHeight = getDrawerHeight();
 
     if (drawer.open) {
-      setY({
+      setY.start({
         y: height.get(),
         onRest: () => {
           setViewName(drawer.viewName);
           sleep(0).then(() => {
             newHeight = getDrawerHeight();
-            setDrawerHeight({
+            setDrawerHeight.start({
               height: newHeight,
               immediate: true,
               onRest: () => setY({ y: 0 }),
@@ -114,10 +109,10 @@ export default function Drawer() {
   }, [drawer.viewName]);
 
   const closeDrawer = () => {
-    setY({
+    setY.start({
       y: height.get(),
       onRest: () =>
-        setOpacity({
+        setOpacity.start({
           drawerBackdropOpacity: 0,
           onRest: () => finalizeClose(),
         }),
@@ -136,17 +131,6 @@ export default function Drawer() {
       }
     }
   };
-
-  const handleResize = () => {
-    setIsMounted(false);
-    closeDrawer();
-  };
-
-  useEffect(() => {
-    if (drawer.open) {
-      window.addEventListener("resize", handleResize);
-    }
-  }, [drawer.open]);
 
   if (!drawer.open && !isMounted) return null;
 

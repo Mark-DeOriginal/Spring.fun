@@ -1,6 +1,6 @@
 import React from "react";
 import UserWelcome from "../components/views/onboarding/UserWelcome";
-import GetStarted from "../components/views/onboarding/GetStarted";
+import SaveSeedPhrase from "../components/views/onboarding/SaveSeedPhrase";
 
 interface GetViewProps {
   viewName: string;
@@ -9,8 +9,8 @@ interface GetViewProps {
 const GetView: React.FC<GetViewProps> = ({ viewName }) => {
   if (viewName === "user_welcome") {
     return <UserWelcome />;
-  } else if (viewName === "get_started") {
-    return <GetStarted />;
+  } else if (viewName === "save_seed_phrase") {
+    return <SaveSeedPhrase />;
   }
 
   // If none matches,

@@ -2,8 +2,8 @@ import openTopMenu from "../../../actions/openTopMenu";
 import VBlock from "../../VBlock";
 
 export const UserWelcome = () => {
-  const goToGetStarted = () => {
-    openTopMenu("get_started");
+  const goToSaveSeedPhrase = () => {
+    openTopMenu("save_seed_phrase");
   };
 
   return (
@@ -33,8 +33,11 @@ export const UserWelcome = () => {
           initial liquidity.
         </p>
         <VBlock quantity={2} />
-        <button onClick={goToGetStarted} className="button button-filled px-14">
-          Get started
+        <button
+          onClick={() => goToSaveSeedPhrase()}
+          className="button button-colored button-filled px-14"
+        >
+          Get Started
         </button>
       </div>
     </section>

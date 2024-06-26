@@ -65,3 +65,23 @@ body.light {
 body.dark {
   @apply bg-springBlue text-springBlueLight-100;
 }
+
+input {
+  @apply bg-transparent rounded-xl;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #aaa3bd;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4d485a;
+  border: 1px solid #aaa3bd;
+  border-radius: 2px;
+}
