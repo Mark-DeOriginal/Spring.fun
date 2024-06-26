@@ -1,0 +1,11 @@
+.button {
+  @apply p-3 px-6 rounded-2xl active:scale-[0.95];
+}
+
+.button-filled {
+  @apply text-offWhite bg-springBlueLight-400 dark:bg-springOrange dark:text-springBlueLight-400;
+}
+
+.button-outlined {
+  @apply border border-springBlueLight-400 text-springBlueLight-400 dark:border-springOrange dark:text-springOrange;
+}

@@ -179,7 +179,7 @@ export default function Drawer() {
           )}
           <animated.div
             className={`drawer-content ${
-              drawer.textAlign ? `text-${drawer.textAlign}` : ""
+              drawer.textAlign ? drawer.textAlign : ""
             }`}
             ref={drawerContent}
             style={{ opacity: drawerContentOpacity }}

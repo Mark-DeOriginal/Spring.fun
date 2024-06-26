@@ -15,13 +15,17 @@ export default function OpenProfileBtn() {
         setModalState({
           open: true,
           viewName: viewName,
-          textAlign: "center",
-          dialogStyles: "w-[450px]",
+          textAlign: "text-center",
+          dialogStyles: "w-[400px]",
         })
       );
     } else {
       store.dispatch(
-        setDrawerState({ open: true, viewName: viewName, textAlign: "center" })
+        setDrawerState({
+          open: true,
+          viewName: viewName,
+          textAlign: "text-center",
+        })
       );
     }
   };

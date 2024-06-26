@@ -33,10 +33,7 @@ export const UserWelcome = () => {
           initial liquidity.
         </p>
         <VBlock quantity={2} />
-        <button
-          onClick={goToGetStarted}
-          className="text-offWhite bg-springBlueLight-400 dark:bg-springOrange dark:text-springBlueLight-400 w-[80%] p-3 rounded-full active:scale-[0.95]"
-        >
+        <button onClick={goToGetStarted} className="button button-filled px-14">
           Get started
         </button>
       </div>
