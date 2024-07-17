@@ -1,31 +1,49 @@
-.button {
-  @apply p-3 px-6 rounded-2xl font-bold;
-}
-
-.button-colored.button-filled {
-  @apply text-offWhite bg-springBlueLight-400 dark:bg-springOrange dark:text-springBlueLight-400;
-}
-
-.button-colored.button-outlined {
-  @apply border border-springBlueLight-400 text-springBlueLight-400 dark:border-springOrange dark:text-springOrange;
-}
-
-.button-neutral.button-filled {
-  @apply text-offWhite bg-springBlueLight-400 dark:bg-springBlueLight-400 dark:text-springBlueLight-200;
-}
-
-.button-neutral.button-outlined {
-  @apply border border-springBlueLight-400 text-springBlueLight-400 dark:border-springBlueLight-300 dark:text-springBlueLight-300;
-}
-
-button:not(:disabled):active {
-  @apply scale-[0.95];
-}
-
 button {
-  @apply opacity-100 transition-opacity duration-500;
+  @apply rounded-2xl transition-colors duration-300;
 }
 
 button:disabled {
-  @apply opacity-30;
+  @apply opacity-60 dark:opacity-30;
+}
+
+.btn-primary {
+  @apply bg-BtnPrimaryLight text-TxtPrimaryDark dark:bg-BtnPrimaryDark dark:text-TxtPrimaryLight;
+}
+
+.btn-primary > .dots-loader > .dot {
+  @apply bg-TxtPrimaryDark dark:bg-TxtPrimaryLight;
+}
+
+.btn-primary:not(:disabled):hover {
+  @apply bg-BtnHoverPrimaryLight dark:bg-BtnHoverPrimaryDark;
+}
+
+.btn-secondary,
+.btn-group-secondary button {
+  @apply bg-BtnSecondaryLight dark:bg-BtnSecondaryDark;
+}
+
+.btn-secondary:not(:disabled):hover,
+.btn-group-secondary button:not(:disabled):hover {
+  @apply bg-BtnHoverSecondaryLight dark:bg-BtnHoverSecondaryDark;
+}
+
+.btn-accent,
+.btn-group-accent button {
+  @apply bg-BtnAccentLight dark:bg-BtnAccentDark;
+}
+
+.btn-accent:not(:disabled):hover,
+.btn-group-accent button:not(.active):hover {
+  @apply bg-BtnHoverAccentLight dark:bg-BtnHoverAccentDark;
+}
+
+.btn-active-scale-sm:not(:disabled):active,
+.btn-group-active-scale-sm button:not(:disabled):active {
+  @apply scale-[0.98];
+}
+
+.btn-active-scale-md:not(:disabled):active,
+.btn-group-active-scale-md button:not(:disabled):active {
+  @apply scale-[0.95];
 }

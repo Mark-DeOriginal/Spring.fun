@@ -1,0 +1,36 @@
+button.jetton {
+  @apply flex justify-between items-center text-left text-sm w-full p-3 rounded-2xl;
+}
+
+button.jetton:not(:last-child) {
+  @apply border-b border-BorderLight dark:border-BorderDark rounded-b-none;
+}
+
+button.jetton:not(:first-child) {
+  @apply rounded-t-none;
+}
+
+.jetton .info {
+  @apply flex gap-2 items-center;
+}
+
+.jetton .info img {
+  @apply w-10 h-10 object-cover rounded-xl;
+}
+
+.jetton h3,
+.jetton h4 {
+  @apply font-semibold text-base;
+}
+
+.jetton p {
+  @apply font-medium;
+}
+
+.jetton .perf.in-loss {
+  @apply text-red-400;
+}
+
+.jetton .perf.in-profit {
+  @apply text-green-500 dark:text-green-400;
+}

@@ -1,16 +1,24 @@
 import React, { useState, ChangeEvent } from "react";
 import "../styles/text-input.css";
 
-interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  labelStyle: string;
+  labelStyle?: string;
   inputStyle?: string;
+  type?: "text" | "password";
+  info?: {
+    isError: boolean;
+    message: string;
+  };
 }
 
 const TextInput: React.FC<TextInputProps> = ({
   label,
   labelStyle,
   inputStyle,
+  type,
+  info,
   ...props
 }) => {
   const [value, setValue] = useState("");
@@ -18,16 +26,25 @@ const TextInput: React.FC<TextInputProps> = ({
     setValue(e.target.value);
 
   return (
-    <div className="input-container">
-      <input
-        type="text"
-        className={`input-field input-neutral ${inputStyle}`}
-        onChange={handleChange}
-        value={value}
-        placeholder=" "
-        {...props}
-      />
-      <label className={`input-label ${labelStyle}`}>{label}</label>
+    <div className="input-wrapper">
+      <div className="input-container">
+        <input
+          type={type || "text"}
+          className={`input-field input-neutral ${inputStyle} ${
+            info?.isError ? "error" : ""
+          }`}
+          onChange={handleChange}
+          value={value}
+          placeholder=" "
+          {...props}
+        />
+        <label className={`input-label ${labelStyle || ""}`}>{label}</label>
+      </div>
+      {info && info.message && (
+        <p className={`info text-left ${info.isError ? "error" : ""}`}>
+          {info.message}
+        </p>
+      )}
     </div>
   );
 };

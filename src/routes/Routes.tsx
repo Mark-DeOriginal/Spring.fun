@@ -1,19 +1,23 @@
 import { useRoutes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import Jettons from "../pages/Jettons";
-import Jetton from "../pages/Jetton";
-import NotFound from "../pages/NotFound";
-import UserProfile from "../pages/UserProfile";
+import Jettons from "../pages/JettonsPage";
+import Jetton from "../pages/JettonPage";
+import NotFound from "../pages/NotFoundPage";
+import UserProfile from "../pages/UserProfilePage";
+import Home from "../pages/HomePage";
 
 const pageVariants = {
   initial: {
     opacity: 0,
+    y: -30,
   },
   in: {
     opacity: 1,
+    y: 0,
   },
   out: {
     opacity: 0,
+    y: 30,
   },
 };
 
@@ -25,9 +29,10 @@ const pageTransition = {
 export default function Routes() {
   const routes = useRoutes([
     { path: "/", element: <Jettons /> },
-    { path: "/user-profile", element: <UserProfile /> },
+    { path: "/home", element: <Home /> },
     { path: "/jettons", element: <Jettons /> },
     { path: "/j/:jettonContractAddress", element: <Jetton /> },
+    { path: "/profile/:walletAddress", element: <UserProfile /> },
     { path: "*", element: <NotFound /> },
   ]);
   const location = useLocation();

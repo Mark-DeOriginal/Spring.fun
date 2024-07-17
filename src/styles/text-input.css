@@ -5,30 +5,37 @@
 
 .input-field {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   outline: none;
-}
-
-.input-colored {
-  @apply border border-springBlueLight-400 text-springBlueLight-400 dark:border-springOrange dark:text-springOrange;
-}
-
-.input-neutral {
-  @apply border border-springBlueLight-400 text-springBlueLight-400 dark:border-springBlueLight-300 dark:text-springBlueLight-100;
+  @apply border border-InputBorderLight dark:border-InputBorderDark;
 }
 
 .input-label {
   position: absolute;
   top: 50%;
-  left: 12px;
+  left: 8px;
   transform: translateY(-50%);
   transition: all 0.2s;
   pointer-events: none;
   padding: 0 5px;
+  @apply bg-BgPrimaryLight dark:bg-BgPrimaryDark text-TxtAccentLight dark:text-TxtAccentDark;
 }
 
 .input-field:focus + .input-label,
 .input-field:not(:placeholder-shown) + .input-label {
   top: 0;
   font-size: 14px;
+}
+
+.input-wrapper .info {
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.input-wrapper .info.error {
+  @apply text-RedShadeLight;
+}
+
+.input-field.error {
+  @apply border-RedShadeLight;
 }

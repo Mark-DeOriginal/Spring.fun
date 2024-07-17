@@ -7,6 +7,7 @@ import getSeedPhrase from "../../../helpers/getSeedPhrase";
 import sleep from "../../../helpers/sleep";
 import closeTopMenu from "../../../actions/closeTopMenu";
 import { useNavigate } from "react-router-dom";
+import getUserInfo from "../../../helpers/getUserInfo";
 
 export const SaveSeedPhrase = () => {
   const [showIsCopied, setShowIsCopied] = useState(false);
@@ -21,7 +22,7 @@ export const SaveSeedPhrase = () => {
 
   const goToProfile = () => {
     closeTopMenu();
-    navigate("user-profile");
+    navigate(`/profile/${getUserInfo("walletName")}`);
   };
 
   return (
@@ -56,7 +57,7 @@ export const SaveSeedPhrase = () => {
           </button>
           <button
             onClick={() => goToProfile()}
-            className="button button-colored button-outlined px-6 flex items-center gap-3"
+            className="button button-colored button-outlined px-6"
           >
             I've Saved it!
           </button>

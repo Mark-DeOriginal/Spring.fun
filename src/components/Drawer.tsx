@@ -108,6 +108,17 @@ export default function Drawer() {
     }
   }, [drawer.viewName]);
 
+  useEffect(() => {
+    let newHeight = getDrawerHeight();
+
+    if (drawer.open) {
+      newHeight = getDrawerHeight();
+      setDrawerHeight.start({
+        height: newHeight,
+      });
+    }
+  }, [drawer.renderCount]);
+
   const closeDrawer = () => {
     setY.start({
       y: height.get(),
@@ -137,7 +148,7 @@ export default function Drawer() {
   return createPortal(
     <div className="drawer-container">
       <animated.div
-        className="drawer-backdrop"
+        className="drawer-backdrop backdrop"
         style={{ opacity: drawerBackdropOpacity }}
         onClick={handleBackdropClick}
       >

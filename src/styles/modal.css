@@ -8,7 +8,7 @@
 }
 
 .modal-container .modal-dialog {
-  @apply relative bg-[#dedde1] mt-10 mx-4 dark:bg-[#353042] text-springBlueLight-300 dark:text-springBluishWhite shadow-cardShadow px-5 py-6 rounded-3xl overflow-y-scroll;
+  @apply relative bg-BgPrimaryLight mt-10 mx-4 dark:bg-BgPrimaryDark shadow-cardShadow px-5 py-6 rounded-3xl overflow-y-scroll;
   will-change: auto;
 }
 

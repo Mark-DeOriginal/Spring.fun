@@ -1,0 +1,69 @@
+.user-profile-section {
+  @apply flex justify-center;
+}
+
+.user-profile-section .container {
+  @apply max-w-[400px] border border-BorderLight dark:border-BorderDark rounded-3xl px-3 pt-4 bg-BgSecondaryLight dark:bg-BgSecondaryDark;
+}
+
+.container .header {
+  @apply pt-4 pb-4 text-center;
+}
+
+.wallet .balance {
+  @apply text-3xl font-semibold tracking-tight;
+}
+
+.wallet .performance {
+  @apply text-base tablet-sm:text-lg flex gap-2 justify-center font-medium;
+}
+
+.user-name button {
+  @apply text-sm mt-2 flex gap-1 items-center px-2 rounded-lg w-fit mx-auto;
+}
+
+.user-name button svg {
+  @apply fill-current h-3;
+}
+
+.user-profile-section .action-btns {
+  @apply flex gap-1 mt-4;
+}
+
+.user-profile-section .action-btns button {
+  @apply py-3 px-2 font-medium flex flex-col gap-1 justify-center items-center text-xs tablet-sm:text-sm basis-1/4 rounded-2xl;
+}
+
+.action-btns button svg {
+  @apply fill-current w-4 tablet-md:w-5;
+}
+
+.user-profile-section .body {
+  @apply border-t space-y-2 border-BorderLight dark:border-BorderDark h-[350px] overflow-y-auto pt-4 pb-3;
+}
+
+.user-profile-section .body::-webkit-scrollbar {
+  display: none;
+}
+
+.wallet .amount-increase.in-loss,
+.wallet .percentage-increase.in-loss {
+  @apply text-RedShadeLight dark:text-RedShadeDark;
+}
+
+.wallet .amount-increase.in-profit,
+.wallet .percentage-increase.in-profit {
+  @apply text-GreenShadeLight dark:text-GreenShadeDark;
+}
+
+.jetton-filters {
+  @apply flex gap-1 justify-center;
+}
+
+.jetton-filters button {
+  @apply text-sm px-2 rounded-lg;
+}
+
+.jetton-filters button.active {
+  @apply bg-BtnActiveBgLight dark:bg-BtnActiveBgDark;
+}

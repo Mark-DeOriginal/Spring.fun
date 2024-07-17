@@ -9,6 +9,7 @@ import GetView from "../helpers/GetView";
 import closeTopMenu from "../actions/closeTopMenu";
 import "../styles/modal.css";
 import sleep from "../helpers/sleep";
+import CloseButton from "./CloseBtn";
 
 export default function Modal() {
   const modal = useSelector((state: RootState) => state.ui.modal);
@@ -58,8 +59,18 @@ export default function Modal() {
     });
   };
 
-  const handleBackDropClick = (e: React.MouseEvent) => {
-    if (modal.backdropCanClose !== false && e.target === e.currentTarget) {
+  const [mouseDownTarget, setMouseDownTarget] = useState<EventTarget | null>(
+    null
+  );
+  const handleBackdropMouseDown = (e: React.MouseEvent) => {
+    setMouseDownTarget(e.target);
+  };
+  const handleBackdropMouseUp = (e: React.MouseEvent) => {
+    if (
+      e.target === mouseDownTarget &&
+      modal.backdropCanClose !== false &&
+      e.target === e.currentTarget
+    ) {
       handleClose();
     }
   };
@@ -91,15 +102,16 @@ export default function Modal() {
         });
       });
     }
-  }, [modal.viewName]);
+  }, [modal.viewName, modal.renderCount]);
 
   if (!modalRoot || !isMounted) return null;
 
   return createPortal(
     <animated.div
-      className="modal-container"
+      className="modal-container backdrop"
       style={{ opacity: modalOpacity }}
-      onClick={handleBackDropClick}
+      onMouseDown={handleBackdropMouseDown}
+      onMouseUp={handleBackdropMouseUp}
     >
       <animated.div
         ref={modalDialog}
@@ -110,15 +122,9 @@ export default function Modal() {
         }}
         role="dialog"
         aria-modal="true"
-        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
       >
-        <button
-          className="modal-close-btn"
-          onClick={handleClose}
-          aria-label="Close modal"
-        >
-          &times;
-        </button>
+        <CloseButton />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -127,9 +133,9 @@ export default function Modal() {
             className={`modal-content ${
               modal.textAlign ? modal.textAlign : ""
             }`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 16 }}
             transition={{ duration: 0.3 }}
             onAnimationStart={() =>
               sleep(0).then(() => {

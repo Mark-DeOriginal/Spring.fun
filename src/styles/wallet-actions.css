@@ -1,0 +1,18 @@
+.wallet-actions-section .wallet-action-btns {
+  @apply grid grid-cols-2 grid-rows-2 gap-1;
+}
+.wallet-actions-section .wallet-action-btns button {
+  @apply dark:text-TxtSecondaryDark py-3 px-2 font-medium flex flex-col gap-3 justify-center items-center text-sm tablet-sm:text-base basis-1/2 rounded-lg;
+}
+
+.wallet-action-btns button svg {
+  @apply fill-TxtSecondaryLight dark:fill-TxtSecondaryDark h-8 tablet-md:h-10;
+}
+
+.wallet-action-btns button svg.set-user-name-icon {
+  @apply h-6 tablet-md:h-8;
+}
+
+.wallet-action-btns button svg.set-password-icon {
+  @apply h-5 tablet-md:h-7;
+}
