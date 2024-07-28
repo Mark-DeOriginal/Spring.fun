@@ -100,8 +100,8 @@ export default function UserProfile() {
                 }`}
               >
                 {percentageIncrease > -1
-                  ? `+$${insertDelimiters(percentageIncrease)}`
-                  : `-$${insertDelimiters(Math.abs(percentageIncrease))}`}
+                  ? `+${insertDelimiters(percentageIncrease)}`
+                  : `-${insertDelimiters(Math.abs(percentageIncrease))}`}
                 %
               </span>
             </div>
@@ -131,7 +131,7 @@ export default function UserProfile() {
           </div>
         </div>
         <div className="body">
-          <div className="jetton-filters btn-group-accent btn-group-active-scale-md">
+          <div className="relative jetton-filters overflow-hidden btn-group-active-scale-md">
             <button
               className={jettonCategory === "all" ? "active" : ""}
               onClick={() => filterJettons("all")}

@@ -10,6 +10,10 @@
   @apply border border-InputBorderLight dark:border-InputBorderDark;
 }
 
+.input-field:focus {
+  @apply border-InputActiveBorderLight dark:border-InputActiveBorderDark;
+}
+
 .input-label {
   position: absolute;
   top: 50%;

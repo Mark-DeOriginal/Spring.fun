@@ -4,7 +4,8 @@ import "../styles/dots-loader.css";
 
 interface ButtonProps {
   isLoading?: boolean;
-  buttonText: string;
+  buttonText?: string;
+  children?: string | React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
@@ -13,6 +14,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   buttonText,
+  children,
   className = "btn-primary",
   onClick,
   disabled = false,
@@ -20,11 +22,11 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type="submit"
-      className={`font-bold px-6 h-[54px] flex items-center justify-center btn-active-scale-sm ${className}`}
+      className={`font-bold px-6 h-[54px] flex items-center gap-3 justify-center btn-active-scale-sm ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
-      {isLoading ? <DotsLoader /> : buttonText}
+      {isLoading ? <DotsLoader /> : children ? children : buttonText}
     </button>
   );
 };

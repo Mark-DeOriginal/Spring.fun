@@ -8,6 +8,7 @@ import sleep from "../../../helpers/sleep";
 import closeTopMenu from "../../../actions/closeTopMenu";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../../helpers/getUserInfo";
+import Button from "../../Button";
 
 export const SaveSeedPhrase = () => {
   const [showIsCopied, setShowIsCopied] = useState(false);
@@ -45,22 +46,19 @@ export const SaveSeedPhrase = () => {
         <VBlock />
         <SeedPhraseBox />
         <VBlock quantity={2} />
-        <div className="button-group flex justify-center gap-2">
-          <button
+        <div className="button-group grid grid-cols-2 gap-2">
+          <Button
             onClick={() => handleSeedPhraseCopy()}
-            className="button button-colored button-filled px-4 flex items-center gap-3"
+            className="btn-primary"
           >
-            <CopyIcon
-              className={`fill-offWhite dark:fill-springBlueLight-400`}
-            />
+            <CopyIcon className={`fill-current`} />
             {showIsCopied ? "Copied" : "Copy"}
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => goToProfile()}
-            className="button button-colored button-outlined px-6"
-          >
-            I've Saved it!
-          </button>
+            buttonText="I've Saved it!"
+            className="btn-secondary"
+          />
         </div>
       </div>
     </section>

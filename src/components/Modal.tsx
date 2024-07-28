@@ -124,7 +124,7 @@ export default function Modal() {
         aria-modal="true"
         onMouseDown={(e) => e.stopPropagation()}
       >
-        <CloseButton />
+        <CloseButton onClick={handleClose} />
 
         <AnimatePresence mode="wait">
           <motion.div

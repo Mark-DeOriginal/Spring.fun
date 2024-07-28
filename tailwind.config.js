@@ -10,16 +10,16 @@ export default {
         BgSecondaryLight: "#f2f0f3",
         BgAccentLight: "#d8d8df",
         // Button
-        BtnPrimaryLight: "#4d4562",
+        BtnPrimaryLight: "#5c5275",
         BtnSecondaryLight: "#dddae3",
         BtnAccentLight: "#e7e5ea",
-        BtnHoverPrimaryLight: "#5c5275",
+        BtnHoverPrimaryLight: "#4d4562",
         BtnHoverSecondaryLight: "#d2cfda",
         BtnHoverAccentLight: "#dcdae1",
         BtnActiveBgLight: "#c8c3d1",
         // Input field
         InputBorderLight: "#c8c3d1",
-        InputFillLight: "",
+        InputActiveBorderLight: "#9b95a7",
         // Text
         TxtPrimaryLight: "#635d72",
         TxtSecondaryLight: "#736c83",
@@ -46,7 +46,7 @@ export default {
         BtnActiveBgDark: "#4d4562",
         // Input field
         InputBorderDark: "#4d4562",
-        InputFillDark: "",
+        InputActiveBorderDark: "#6a6283",
         // Text
         TxtPrimaryDark: "#dbd2f5",
         TxtSecondaryDark: "#dbd2f5",

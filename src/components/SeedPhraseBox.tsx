@@ -12,20 +12,20 @@ const SeedPhraseBox = () => {
     }, 3000);
   };
   return (
-    <div className="seed-phrase-box relative p-3 text-left overflow-hidden">
+    <div className="seed-phrase-box relative p-3 text-left overflow-hidden  border border-BorderLight dark:border-BorderDark rounded-2xl">
       <button
         onClick={() => handleShowSeedPhrase()}
-        className="seed-phrase-copy-btn absolute bottom-3 right-4 z-[1] active:scale-[0.95] flex items-center justify-center fill-springBlueLight-400 dark:fill-springBluishWhite"
+        className="seed-phrase-copy-btn h-7 absolute bottom-3 right-4 z-[1] active:scale-[0.95] flex items-center justify-center fill-TxtAccentLight dark:fill-TxtAccentDark"
       >
         {showSeedPhrase ? (
-          <HidePasswordIcon className={`h-4 w-auto`} />
+          <HidePasswordIcon className={`w-6 h-auto`} />
         ) : (
-          <ShowPasswordIcon className={`h-4 w-auto`} />
+          <ShowPasswordIcon className={`w-6 h-auto`} />
         )}
       </button>
       <div
-        className={`seed-phrase-veil dark:bg-springBlueLight-400/25 bg-[#d3d1d865] border border-[#bfbbcb] dark:border-springBlueLight-400 rounded-2xl ${
-          !showSeedPhrase ? "backdrop-blur-[3px]" : ""
+        className={`seed-phrase-veil bg-BgPrimaryLight dark:bg-BgPrimaryDark ${
+          !showSeedPhrase ? "opacity-[0.95] dark:opacity-[0.98]" : "opacity-0"
         } absolute top-0 left-0 right-0 bottom-0 duration-300`}
       ></div>
       <p className="seed-phrase text-sm">{getSeedPhrase()}</p>

@@ -55,7 +55,7 @@ p + p {
 }
 
 body {
-  @apply text-base;
+  @apply relative text-base;
 }
 
 body.light {

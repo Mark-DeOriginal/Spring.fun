@@ -1,7 +1,7 @@
 import React from "react";
 
 interface CloseBtnProps {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
 }
 
