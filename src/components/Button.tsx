@@ -22,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type="submit"
-      className={`font-bold px-6 h-[54px] flex items-center gap-3 justify-center btn-active-scale-sm ${className}`}
+      className={`font-bold px-6 h-[50px] flex items-center gap-3 justify-center btn-active-scale-sm ${className}`}
       onClick={onClick}
       disabled={disabled}
     >

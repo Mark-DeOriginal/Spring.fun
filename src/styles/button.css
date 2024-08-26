@@ -1,5 +1,5 @@
 button {
-  @apply rounded-2xl transition-opacity duration-300;
+  @apply rounded-3xl transition-opacity duration-300;
 }
 
 button:disabled {

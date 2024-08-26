@@ -3,6 +3,7 @@ import "../styles/jetton-component.css";
 import insertDelimiters from "../helpers/insertDelimiters";
 import { useNavigate } from "react-router-dom";
 import { UIState } from "../redux-states/uiSlice";
+import Image from "./ImageComponent";
 
 interface JettonsComponentProps {
   jettons: UIState["userJettons"];
@@ -27,7 +28,7 @@ const UserJetton: React.FC<JettonProps> = ({ jetton }) => {
       className="jetton"
     >
       <div className="info">
-        <img src={jetton.jettonLogo} className="image" />
+        <Image src={jetton.jettonLogo} className="w-10 h-10 rounded-xl" />
         <div className="name-and-qty">
           <h3>{jetton.jettonName}</h3>
           <p className="text-TxtAccentShyLight dark:text-TxtAccentShyDark">

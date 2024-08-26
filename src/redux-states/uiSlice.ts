@@ -33,6 +33,9 @@ export interface UIState {
     jettonAddress: string;
     jettonCategory: "owned" | "created";
   }[];
+  welcomePageView: {
+    viewIndex: number;
+  };
 }
 
 const initialState: UIState = {
@@ -88,6 +91,9 @@ const initialState: UIState = {
       jettonCategory: "owned",
     },
   ],
+  welcomePageView: {
+    viewIndex: 0,
+  },
 };
 
 const uiSlice = createSlice({
@@ -137,6 +143,12 @@ const uiSlice = createSlice({
         state.drawer.renderCount! += 1;
       }
     },
+    incrWelcomePageViewIndex(state) {
+      state.welcomePageView.viewIndex += 1;
+    },
+    decrWelcomePageViewIndex(state) {
+      state.welcomePageView.viewIndex -= 1;
+    },
   },
 });
 
@@ -152,6 +164,8 @@ export const {
   setUserJettons,
   addUserJetton,
   incTopMenuRenderCount,
+  incrWelcomePageViewIndex,
+  decrWelcomePageViewIndex,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

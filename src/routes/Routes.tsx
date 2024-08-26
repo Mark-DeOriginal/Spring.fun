@@ -5,6 +5,7 @@ import Jetton from "../pages/JettonPage";
 import NotFound from "../pages/NotFoundPage";
 import UserProfile from "../pages/UserProfilePage";
 import Home from "../pages/HomePage";
+import WelcomePage from "../pages/WelcomePage";
 
 const pageVariants = {
   initial: {
@@ -29,6 +30,7 @@ const pageTransition = {
 export default function Routes() {
   const routes = useRoutes([
     { path: "/", element: <Jettons /> },
+    { path: "/welcome", element: <WelcomePage /> },
     { path: "/home", element: <Home /> },
     { path: "/jettons", element: <Jettons /> },
     { path: "/j/:jettonContractAddress", element: <Jetton /> },

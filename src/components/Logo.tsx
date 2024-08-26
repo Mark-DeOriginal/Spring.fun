@@ -6,13 +6,19 @@ import {
   LogoLightMode,
 } from "../assets/spring-logo";
 import { RootState } from "../redux-states/store";
+import { classNames } from "../helpers/classNames";
 
 interface LogoProps {
   type: "icon" | "logo";
   isLink: boolean;
+  mediaResponsive?: boolean;
 }
 
-export default function Logo({ type, isLink }: LogoProps) {
+export default function Logo({
+  type,
+  isLink,
+  mediaResponsive = true,
+}: LogoProps) {
   const theme = useSelector((state: RootState) => state.ui.theme);
 
   const content =
@@ -25,14 +31,34 @@ export default function Logo({ type, isLink }: LogoProps) {
     ) : (
       <>
         {theme === "light" ? (
-          <LogoLightMode className={`h-9 w-auto max-tablet-lg:hidden`} />
+          <LogoLightMode
+            className={classNames(
+              "h-9 w-auto",
+              mediaResponsive ? "max-tablet-lg:hidden" : ""
+            )}
+          />
         ) : (
-          <LogoDarkMode className={`h-9 w-auto max-tablet-lg:hidden`} />
+          <LogoDarkMode
+            className={classNames(
+              "h-9 w-auto",
+              mediaResponsive ? "max-tablet-lg:hidden" : ""
+            )}
+          />
         )}
         {theme === "light" ? (
-          <LogoIconLightMode className={`h-9 w-auto tablet-lg:hidden`} />
+          <LogoIconLightMode
+            className={classNames(
+              "h-9 w-auto",
+              mediaResponsive ? "tablet-lg:hidden" : "hidden"
+            )}
+          />
         ) : (
-          <LogoIconDarkMode className={`h-9 w-auto tablet-lg:hidden`} />
+          <LogoIconDarkMode
+            className={classNames(
+              "h-9 w-auto",
+              mediaResponsive ? "tablet-lg:hidden" : "hidden"
+            )}
+          />
         )}
       </>
     );

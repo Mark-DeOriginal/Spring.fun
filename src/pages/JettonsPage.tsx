@@ -1,6 +1,8 @@
+import Layout from "../components/Layout";
+
 export default function Jettons() {
   return (
-    <>
+    <Layout>
       <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
         Welcome to <br className="tablet-md:hidden" />
         Spring.fun
@@ -33,6 +35,6 @@ export default function Jettons() {
       <p>This is where you come to explore Jettons.</p>
       <p>Execute trades at unparalleled speed.</p>
       <p>Create jettons that are instantly tradeable.</p>
-    </>
+    </Layout>
   );
 }

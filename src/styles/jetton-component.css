@@ -3,19 +3,15 @@ button.jetton {
 }
 
 button.jetton:not(:last-child) {
-  @apply border-b border-BorderLight dark:border-BorderDark rounded-b-none;
-}
-
-button.jetton:not(:first-child) {
-  @apply rounded-t-none;
+  @apply mb-1;
 }
 
 .jetton .info {
   @apply flex gap-2 items-center;
 }
 
-.jetton .info img {
-  @apply w-10 h-10 object-cover rounded-xl;
+.jetton .img-placeholder {
+  @apply bg-BtnHoverSecondaryLight dark:bg-BtnHoverSecondaryDark !important;
 }
 
 .jetton h3,

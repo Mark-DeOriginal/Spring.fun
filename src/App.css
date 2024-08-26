@@ -59,15 +59,20 @@ body {
 }
 
 body.light {
-  @apply bg-BgPrimaryLight text-TxtPrimaryLight;
+  @apply bg-BgPrimaryLight text-TxtSecondaryLight;
 }
 
 body.dark {
-  @apply bg-BgPrimaryDark text-BgPrimaryLight;
+  @apply bg-BgPrimaryDark text-TxtSecondaryDark;
 }
 
-p {
-  @apply text-TxtSecondaryLight dark:text-TxtSecondaryDark;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-TxtPrimaryLight dark:text-TxtPrimaryDark;
 }
 
 input {
@@ -91,4 +96,16 @@ input {
 
 .backdrop {
   @apply bg-BackdropColor;
+}
+
+.progressive-view-indicator {
+  @apply flex gap-1;
+}
+
+.progressive-view-indicator .indicator {
+  @apply h-2 w-3 bg-TxtAccentLight/30 dark:bg-TxtAccentDark/30 rounded-3xl;
+}
+
+.progressive-view-indicator .indicator.active {
+  @apply w-6 bg-TxtAccentLight/80 dark:bg-TxtAccentDark/80;
 }

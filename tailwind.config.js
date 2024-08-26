@@ -21,7 +21,7 @@ export default {
         InputBorderLight: "#c8c3d1",
         InputActiveBorderLight: "#9b95a7",
         // Text
-        TxtPrimaryLight: "#635d72",
+        TxtPrimaryLight: "#504963",
         TxtSecondaryLight: "#736c83",
         TxtAccentLight: "#88809e",
         TxtAccentShyLight: "#9b97a5",
@@ -48,7 +48,7 @@ export default {
         InputBorderDark: "#4d4562",
         InputActiveBorderDark: "#6a6283",
         // Text
-        TxtPrimaryDark: "#dbd2f5",
+        TxtPrimaryDark: "#ededf2",
         TxtSecondaryDark: "#dbd2f5",
         TxtAccentDark: "#bcb1dd",
         TxtAccentShyDark: "#9a92af",
@@ -59,6 +59,9 @@ export default {
 
         GreenShadeDark: "#4ade80",
         RedShadeDark: "#f87171",
+
+        SpringOrange: "#f2bd68",
+        SpringGreen: "#d7e68a",
       },
       screens: {
         "tablet-sm": "400px",
