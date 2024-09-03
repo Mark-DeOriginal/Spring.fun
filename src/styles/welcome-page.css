@@ -1,0 +1,11 @@
+.progressive-view-indicator {
+  @apply flex gap-1;
+}
+
+.progressive-view-indicator .indicator {
+  @apply h-2 w-3 bg-TxtAccentLight/30 dark:bg-TxtAccentDark/30 rounded-3xl;
+}
+
+.progressive-view-indicator .indicator.active {
+  @apply w-6 bg-TxtAccentLight/80 dark:bg-TxtAccentDark/80;
+}

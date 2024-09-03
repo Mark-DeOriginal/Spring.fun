@@ -4,12 +4,16 @@ import Image from "../components/ImageComponent";
 import Logo from "../components/Logo";
 import FastTrade from "/fast-trade-img.jpg";
 import AutoTrade from "/automated-trading-img.png";
+import RugImg from "/rug-img.jpg";
 import { RootState, store } from "../redux-states/store";
 import {
   decrWelcomePageViewIndex,
   incrWelcomePageViewIndex,
 } from "../redux-states/uiSlice";
 import { AnimatePresence, motion } from "framer-motion";
+import "./../styles/welcome-page.css";
+import React, { useEffect } from "react";
+import preloadImages from "../helpers/preloadImages";
 
 const NextViewButton: React.FC<{ onClick: () => void }> = ({ onClick }) => (
   <Button onClick={onClick} className="btn-primary !px-16">
@@ -145,11 +149,33 @@ const views = [
     title: "Do more with Automation",
     subtitle: "Set limit orders and autobuy actions",
     imageUrl: AutoTrade,
-    content: <p>Trading has never been so easy on TON.</p>,
+    content: (
+      <p>
+        Get into or exit trades at your desired entry or exit point without
+        hassle.
+      </p>
+    ),
+  },
+  {
+    title: "Never get Rugged again",
+    subtitle: "We filter out tokens not safe to trade",
+    imageUrl: RugImg,
+    content: (
+      <p>
+        Now you can trade without fear of getting rugged by scammy devs and
+        team.
+      </p>
+    ),
   },
 ];
 
+const imageUrls = [FastTrade, AutoTrade, RugImg];
+
 export default function WelcomePage() {
+  useEffect(() => {
+    preloadImages(imageUrls);
+  }, []);
+
   const viewIndex = useSelector(
     (state: RootState) => state.ui.welcomePageView.viewIndex
   );
@@ -171,7 +197,7 @@ export default function WelcomePage() {
           </ViewTemplate>
         </>
       ) : (
-        <h1>No more views left</h1>
+        <h1>Nothing to see here</h1>
       )}
     </section>
   );
